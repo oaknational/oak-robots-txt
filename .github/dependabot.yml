@@ -1,15 +1,24 @@
 version: 2
 updates:
-  # Track updates for Github Actions workflows from oak-terraform-actions repository.
+
+# Track updates for all Github Actions used in workflows. Oak's own actions are
+# grouped and update at once; third-party actions are grouped and wait 7 days
+# after release.
   - package-ecosystem: "github-actions"
     directory: "/"
-    allow:
-      - dependency-name: "oaknational/oak-terraform-actions"
-      - dependency-name: "oaknational/oak-release-actions"
+    groups:
+      oak-actions:
+        patterns: ["oaknational/*"]
+      third-party-actions:
+        patterns: ["*"]
+        exclude-patterns: ["oaknational/*"]
+    cooldown:
+      default-days: 7
+      exclude: ["oaknational/*"]
     schedule:
       interval: "daily"
 
-  # Track updates for Terraform modules from oak-terraform-modules repository.
+# Track updates for Terraform modules from oak-terraform-modules repository.
   - package-ecosystem: "terraform"
     directories: ["infrastructure/**/*"]
     allow:

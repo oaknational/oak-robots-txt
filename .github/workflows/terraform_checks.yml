@@ -8,8 +8,8 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Run Terraform Action from oak-terraform-actions
-        uses: oaknational/oak-terraform-actions/actions/terraform-checks@d61b1d03471eeae76166188994f41f3261c57f40 # v1.10.0
+        uses: oaknational/oak-terraform-actions/actions/terraform-checks@9f75b4438580bc2ce29c75096446b48f57fc7357 # v1.13.3
         env:
           TF_WORKSPACE: ci-cd # This is necessary due to the use of Terraform Workspaces and if undefined it will be `default`
